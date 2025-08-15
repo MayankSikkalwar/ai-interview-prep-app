@@ -3,6 +3,9 @@ import HERO_IMG from "../assets/Hero_img.png";
 import { APP_FEATURES } from "../utils/data";
 import { useNavigate } from "react-router-dom";
 import {LuSparkles} from 'react-icons/lu'
+import Login from "./Auth/Login";
+import SignUp from "./Auth/SignUp";
+import Modal from "../components/Modal";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -133,7 +136,23 @@ const LandingPage = () => {
 
 
       </div>
-      
+      <Modal
+          isOpen={openAuthModal}
+          onClose={() => {
+            setOpenAuthModal(false);
+            setCurrentPage("login");
+          }}
+          hideHeader
+          >
+            <div>
+              {currentPage === "login" && (
+                <Login setCurrentPage={setCurrentPage} />
+              )}
+              {currentPage === "signup" && (
+                <SignUp setCurrentPage={setCurrentPage} />
+              )}
+            </div>
+          </Modal>
     </>
   );
 };
